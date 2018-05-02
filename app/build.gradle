@@ -33,7 +33,7 @@ android {
         release {
             keyAlias 'demo'
             keyPassword '818283imb'
-            storeFile file('/Users/korneliussendy/Documents/KeyStore/GApps') //path to key
+            storeFile file('../GApps') //path to key
             storePassword '818283imb'
         }
     }
