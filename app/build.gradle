@@ -1,29 +1,30 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion project.myCompileSdkVersion.toInteger()
+    buildToolsVersion project.myBuildToolsVersion
     defaultConfig {
         //Ganti dengan Apps Id
-        applicationId "gawe.imb.karya.release1"
-        minSdkVersion 19
-        targetSdkVersion 27
-        //Ganti dengan Apps Version Code
-        versionCode 3
-        //Ganti dengan Apps Version Name
-        versionName "1.2"
+        applicationId project.myApplicationId
+        minSdkVersion project.myMinSdkVersion.toInteger()
+        targetSdkVersion project.myTargetSdkVersion.toInteger()
+
+        versionCode project.myVersionCode.toInteger()
+        versionName project.myVersionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         manifestPlaceholders = [
                 //main/src/res/drawable/icon
                 //copy file image ke folder drawable/ dengan nama icon
-                appIcon     : "@drawable/icon",
+                appIcon     : project.myIcon,
                 //copy file image ke folder drawable/ dengan nama icon
-                appIconRound: "@drawable/icon",
+                appIconRound: project.myIconRound,
                 //Ganti dengan App Name
-                 appName     : "RELEASE 2"
+                appName     : project.myAppName
         ]
 
-        buildConfigField "String", "APP_ID", '"AAAGRELEASE1"' //Ganti dengan App Code
+        def CONFIG = { k -> "\"${project.properties.get(k)}\"" }
+        buildConfigField "String", "APP_ID", CONFIG("myAppId") //Ganti dengan App Code
 
     }
 
@@ -31,10 +32,10 @@ android {
 
     signingConfigs {
         release {
-            keyAlias 'demo'
-            keyPassword '818283imb'
-            storeFile file('../GApps') //path to key
-            storePassword '818283imb'
+            keyAlias project.myKeyAlias
+            keyPassword project.myKeyP
+            storeFile file(project.myKeyPath) //path to key
+            storePassword project.myStoreP
         }
     }
 
@@ -46,7 +47,6 @@ android {
 
         }
     }
-
 }
 
 dependencies {
