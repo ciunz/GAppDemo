@@ -17,14 +17,13 @@ android {
                 //main/src/res/drawable/icon
                 //copy file image ke folder drawable/ dengan nama icon
                 appIcon     : project.myIcon,
-                //copy file image ke folder drawable/ dengan nama icon
                 appIconRound: project.myIconRound,
-                //Ganti dengan App Name
                 appName     : project.myAppName
         ]
 
         def CONFIG = { k -> "\"${project.properties.get(k)}\"" }
-        buildConfigField "String", "APP_ID", CONFIG("myAppId") //Ganti dengan App Code
+        buildConfigField "String", "APP_ID", CONFIG("myAppId")
+        buildConfigField "int", "PREMIUM", project.premium
 
     }
 
